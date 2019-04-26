@@ -43,7 +43,7 @@ public class Library {
 				"Search to enquire about book info\r\n" + 
 				"Delete to delete a book\r\n" + 
 				"Display to display book(s) info\r\n" + 
-				"Quit to exit from the current level of interactions");
+				"Quit to exit the System");
 		System.out.println("Enter your command here:");
 		String input  = new Scanner(System.in).nextLine().trim().toLowerCase();
 		switch(input) {
@@ -112,8 +112,8 @@ public class Library {
 			}
 			cur = cur.Next;
 		}
-		System.out.println("Enter type of information you want to update, ‘T’ for title, ‘A’ for author, ‘C’ for\n" + 
-				"category, ‘TC’ for total copy number, ‘AC’ for available number: 'TC' for Total Number, anything else to quit");
+		System.out.println("Enter type of information you want to update, 'T' for title, 'A' for author, 'C' for\n" + 
+				"category, 'TC' for total copy number, 'AC' for available number, anything else to quit");
 		userinput = new Scanner(System.in).nextLine();
 		switch(userinput.trim().toUpperCase()) {
 		case "T" : System.out.println("Please input the title you want to change or 'quit' to quit ");
@@ -168,17 +168,16 @@ public class Library {
 		default:System.out.println("quit the updating successfully"); userInterface();
 		break;
 		}
-		System.out.println("Information update sucessfully!");
-		System.out.println();
+		System.out.println("Information update sucessfully!\n");
 		userInterface();
 	}
-	/** deletebook from library **/
+	/** delete book from library **/
 	private void deleteBook() {
 		if(isEmpty()) {
 			System.out.println("There is no book in the System\n");
 			userInterface();
 		}
-		System.out.println("Enter the book’s ISBN or title + author:");
+		System.out.println("Enter the bookï¿½s ISBN or title + author:");
 		String keyword = new Scanner(System.in).nextLine().trim().toLowerCase();
 		Book cur = head;
 		for(int i=0;i<Librarysize;i++) {
@@ -199,7 +198,7 @@ public class Library {
 				}
 			if(keyword.equals(cur.Next.bookTitle.trim().toLowerCase()+" + "+cur.Next.bookauthor.trim().toLowerCase())||keyword.equals(cur.Next.ISBN)) {
 				if(cur.Next.copyAvailable!=cur.Next.copyNumber) {
-					System.out.println("Sorry this book cannot be deleted. There are" + (cur.Next.copyNumber-cur.Next.copyAvailable) +" copies have been lent out");
+					System.out.println("Sorry this book cannot be deleted. There are " + (cur.Next.copyNumber-cur.Next.copyAvailable) +" copies have been lent out");
 					userInterface();
 				}
 				Book DelBook = cur.Next;
@@ -284,7 +283,7 @@ public class Library {
 		while(true){
 			if(input.trim().toLowerCase().equals("quit")) userInterface();
 			else if(!input.matches(ptn.pattern())) {
-				System.out.println("title input illegal, please input English names or input 'quit' to exit");
+				System.out.println("input illegal, only English words and spacing allowed,  or input 'quit' to exit");
 				input  = new Scanner(System.in).nextLine();
 			}
 			else break;
@@ -339,7 +338,7 @@ public class Library {
 			else break;
 			}
 			catch(Exception e) {
-				System.out.println("Please input a postive number, enter 'quit' to quit");
+				System.out.println("Please input a postive number or enter 'quit' to quit");
 			}
 		}
 		return copyNumber;
