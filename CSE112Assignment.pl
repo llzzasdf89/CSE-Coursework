@@ -1,10 +1,6 @@
-jug(a).
-jug(b).
-maxgallon(jug(a),4).
-maxgallon(jug(b),3).
-state(x,y).
-initalstate(jug(a),0).
-initalstate(jug(b),0).
-empty(jug(X)):- state(x,y), y>0,y<=3.
-fillup(jug(Y)) :- state(x,y),x>=0,x<=4.
-goalstate(jug(a),2).
+state(JugAhasWater,JugBhasWater):- JugAhasWater=0, JugBhasWater=0.
+fillupjuga(state(4,JugBhasWater)):- JugAhasWater<4,JugAhasWater>=0.
+emptyjugb(state(JugAhasWater,0)) :- JugBhasWater>0, JugBhasWater=<3.
+jugbhasenoughwater(JugAhasWater,JugBhasWater):- JugAhasWater<4, JugAhasWater>=0, 4-JugAhasWater=<JugBhasWater.
+fillupjugawithb(state(4,JugBhasWater)) :- jugbhasenoughwater(JugAhasWater,JugBhasWater).
+fillupbwitha(JugAhasWater,3) :-JugBhasWater

@@ -67,16 +67,16 @@ public class Library {
 	private void addBook() {
 		int copyAvailable=0;
 		String ISBN,author,category,copyNumber,title;
-		System.out.println("Enter a new book ISBN:");
+		System.out.println("Enter a new book ISBN, or input 'quit' to quit");
 		ISBN = validateISBN();
-		System.out.println("Enter the title:");
+		System.out.println("Enter the title, or input 'quit' to quit");
 		title=validateAuthorTitle();
-		System.out.println("Enter the author:");
+		System.out.println("Enter the author, or input 'quit' to quit");
 		author=validateAuthorTitle();
 		if(validateBook(ISBN,title,author)) userInterface();
-		System.out.println("Please input the category from the list: IT , Arts, Business, Comics, Cooking, Sports");
+		System.out.println("Please input the category from the list: [IT , Arts, Business, Comics, Cooking, Sports], or input 'quit' to quit");
 		category= validateCategory();
-		System.out.println("Enter total copy number:");
+		System.out.println("Enter total copy number, or input 'quit' to quit");
 		copyNumber= validateCopyNumber();
 		copyAvailable = Integer.parseInt(copyNumber);
 		System.out.println("Ready to add book: " + ISBN + ";  " + title+ ";  " + author + ";  " + category + ";  " + copyNumber + ";  " + copyAvailable);
@@ -105,12 +105,18 @@ public class Library {
 		String ISBN = validateISBN();
 		String userinput;
 		Book cur = head;
+		boolean isFound = false;
 		for(int i=0; i<Librarysize ; i++) {
 			if(cur.ISBN .equals(ISBN)) {
+				isFound = true;
 				System.out.println(cur);
 				break;
 			}
 			cur = cur.Next;
+		}
+		if(!isFound){
+			System.out.println("Sorry the book you want to update does not exist in the Library. Now we will go back to the userInterface\n");
+			userInterface();
 		}
 		System.out.println("Enter type of information you want to update, 'T' for title, 'A' for author, 'C' for\n" + 
 				"category, 'TC' for total copy number, 'AC' for available number, anything else to quit");
@@ -132,7 +138,7 @@ public class Library {
 		};
 		cur.bookauthor = author;
 		break;
-		case "C":  System.out.println("Please input the category you want to change,quit to quit");
+		case "C":  System.out.println("Please input the category from the list :[IT,Arts, Business, Comics, Cooking, Sports], or enter 'quit' to quit");
 		String category = validateCategory();
 		cur.category = category;
 		break;
@@ -185,6 +191,7 @@ public class Library {
 			 * 1. The book is at the head of the Linkedlist 
 			 * 2. The book is not at the head of the Linkedlist
 			 */
+			try {
 			if(keyword.equals(head.bookTitle.trim().toLowerCase()+" + "+head.bookauthor.trim().toLowerCase())||keyword.equals(head.ISBN)) {
 				if(head.copyAvailable!=head.copyNumber) {
 					System.out.println("Sorry this book cannot be deleted. There are " + (head.copyNumber-head.copyAvailable) +" copies have been lent out");
@@ -195,8 +202,8 @@ public class Library {
 				Librarysize--;//after delete a book maintain the library size ;
 				System.out.println("Delete successfully!\n");
 				userInterface();
-				}
-			if(keyword.equals(cur.Next.bookTitle.trim().toLowerCase()+" + "+cur.Next.bookauthor.trim().toLowerCase())||keyword.equals(cur.Next.ISBN)) {
+			}
+			else if(keyword.equals(cur.Next.bookTitle.trim().toLowerCase()+" + "+cur.Next.bookauthor.trim().toLowerCase())||keyword.equals(cur.Next.ISBN)) {
 				if(cur.Next.copyAvailable!=cur.Next.copyNumber) {
 					System.out.println("Sorry this book cannot be deleted. There are " + (cur.Next.copyNumber-cur.Next.copyAvailable) +" copies have been lent out");
 					userInterface();
@@ -208,11 +215,12 @@ public class Library {
 				System.out.println("Delete successfully!\n");
 				userInterface();
 				}
-			
 			cur = cur.Next;
+		}catch(Exception e) {
+			System.out.println("Sorry, the system does not find the book you search for\n now it will go back to userInterface\n");
+			userInterface();
 		}
-		System.out.println("Sorry, the system does not find the book you search for\n now it will go back to userInterface\n");
-		userInterface();
+			}
 	}
 	/** search book **/
 	private void searchBook() {
@@ -295,7 +303,7 @@ public class Library {
 		String ISBN = new Scanner(System.in).nextLine();
 		Pattern ptn = Pattern.compile("[0-9]{10,13}");
 		while(true){
-			if(ISBN.trim().toLowerCase()=="quit") userInterface();
+			if(ISBN.trim().toLowerCase().equals("quit")) userInterface();
 			else if(!ISBN.matches(ptn.pattern())) {
 				System.out.println("ISBN input illegal, please input 10-13 digits numbers or input 'quit' to exit");
 				ISBN = new Scanner(System.in).nextLine();
@@ -322,7 +330,7 @@ public class Library {
 			else throw new Exception();
 			}
 			catch(Exception e) {
-				System.out.println("Please input one of the categories or input 'quit' to quit");
+				System.out.println("Please input the category from the list :[IT,Arts, Business, Comics, Cooking, Sports], or enter 'quit' to quit");
 			}
 		}
 		return category;
