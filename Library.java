@@ -74,7 +74,7 @@ public class Library {
 		System.out.println("Enter the author, or input 'quit' to quit");
 		author=validateAuthorTitle();
 		if(validateBook(ISBN,title,author)) userInterface();
-		System.out.println("Please input the category from the list: [IT , Arts, Business, Comics, Cooking, Sports], or input 'quit' to quit");
+		System.out.println("Please input the category from the list: IT , Arts, Business, Comics, Cooking, Sports, or input 'quit' to quit");
 		category= validateCategory();
 		System.out.println("Enter total copy number, or input 'quit' to quit");
 		copyNumber= validateCopyNumber();
@@ -144,6 +144,25 @@ public class Library {
 		break;
 		case "TC": System.out.println("Please input the total number you want to change,quit to quit");
 		String TotalNumber = validateCopyNumber();
+		while(true) {// prevent the situation in which the new TotalNumber < Available number of book in the laborary
+			try{
+			if(Integer.parseInt(TotalNumber)<cur.copyAvailable) throw new ArithmeticException();
+			else if(Integer.parseInt(TotalNumber)<0) throw new Exception();
+			else if(TotalNumber.trim().toLowerCase().equals("quit")){
+				System.out.println("back to the user Interface\n");
+				userInterface();
+			}
+			else break;
+			}
+			catch(ArithmeticException e) {
+				System.out.println("the copy number your input is less than the copy available, please check and input again, or input 'quit' to go back to user Interface");
+				TotalNumber = new Scanner(System.in).nextLine();
+			}
+			catch(Exception e) {
+				System.out.println("input illegal, please input a postive number or input 'quit' to go back to the user Interface" );
+				TotalNumber = new Scanner(System.in).nextLine();
+			}
+		}
 		cur.copyNumber = Integer.parseInt(TotalNumber);
 		break;
 		case "AC": System.out.println("Please input the available number you want to change,quit to quit");
@@ -151,22 +170,22 @@ public class Library {
 		while(true){
 			try{
 			availableNumber= new Scanner(System.in).nextLine().trim().toLowerCase();
-			if(availableNumber.equals("quit")) userInterface();
 			if(Integer.parseInt(availableNumber)>cur.copyNumber) throw new ArithmeticException();
+			else if(availableNumber.equals("quit")) userInterface();
 			else if(Integer.parseInt(availableNumber)<0) throw new IllegalArgumentException();
 			else break;
 			}
 			catch(ArithmeticException e) {
 				System.out.println("Available number can't be more than total number!");
-				System.out.println("Please input a valueable number again");
+				System.out.println("Please input a valueble number again, or input 'quit' to userInterface");
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Please input a positive integer!!");
-				System.out.println("Please input a valueable number again");
+				System.out.println("Please input a valueale number again, or input 'quit' to userInterface");
 			}
 			catch(Exception e) {
 				System.out.println("Please input a number");
-				System.out.println("Please input a valueable number again");
+				System.out.println("Please input a valueble number again, or input 'quit' to userInterface");
 			}
 		}
 		cur.copyAvailable = Integer.parseInt(availableNumber);
@@ -340,7 +359,7 @@ public class Library {
 		String copyNumber;
 		while(true){
 			try{
-				copyNumber= new Scanner(System.in).nextLine();
+			copyNumber= new Scanner(System.in).nextLine();
 			if(copyNumber.equals("quit")) userInterface();
 			else if(Integer.parseInt(copyNumber)<=0) throw new Exception();
 			else break;
