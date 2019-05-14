@@ -170,22 +170,22 @@ public class Library {
 		while(true){
 			try{
 			availableNumber= new Scanner(System.in).nextLine().trim().toLowerCase();
-			if(Integer.parseInt(availableNumber)>cur.copyNumber) throw new ArithmeticException();
-			else if(availableNumber.equals("quit")) userInterface();
+			if(availableNumber.toLowerCase().trim().equals("quit")) userInterface();
+			else if(Integer.parseInt(availableNumber)>cur.copyNumber) throw new ArithmeticException();
 			else if(Integer.parseInt(availableNumber)<0) throw new IllegalArgumentException();
 			else break;
 			}
 			catch(ArithmeticException e) {
 				System.out.println("Available number can't be more than total number!");
-				System.out.println("Please input a valueble number again, or input 'quit' to userInterface");
+				System.out.println("Please input a valuable number again, or input 'quit' to userInterface");
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Please input a positive integer!!");
-				System.out.println("Please input a valueale number again, or input 'quit' to userInterface");
+				System.out.println("Please input a valuable number again, or input 'quit' to userInterface");
 			}
 			catch(Exception e) {
 				System.out.println("Please input a number");
-				System.out.println("Please input a valueble number again, or input 'quit' to userInterface");
+				System.out.println("Please input a valuable number again, or input 'quit' to userInterface");
 			}
 		}
 		cur.copyAvailable = Integer.parseInt(availableNumber);
@@ -202,7 +202,7 @@ public class Library {
 			System.out.println("There is no book in the System\n");
 			userInterface();
 		}
-		System.out.println("Enter the book�s ISBN or title + author:");
+		System.out.println("Enter the book's ISBN or title + author:");
 		String keyword = new Scanner(System.in).nextLine().trim().toLowerCase();
 		Book cur = head;
 		for(int i=0;i<Librarysize;i++) {
@@ -317,21 +317,21 @@ public class Library {
 		}
 		return input;
 	}
-	/** validate ISBN input by user, to make sure ISBN in 10-13 digits**/
+	/** validate ISBN input by user, to make sure ISBN of 10 or 13 digits**/
 	private String validateISBN() {
 		String ISBN = new Scanner(System.in).nextLine();
-		Pattern ptn = Pattern.compile("[0-9]{10,13}");
+		Pattern ptn = Pattern.compile("([0-9]{10})|([0-9]{13})");
 		while(true){
 			if(ISBN.trim().toLowerCase().equals("quit")) userInterface();
 			else if(!ISBN.matches(ptn.pattern())) {
-				System.out.println("ISBN input illegal, please input 10-13 digits numbers or input 'quit' to exit");
+				System.out.println("ISBN input illegal, please input 10 or 13 digits numbers or input 'quit' to exit");
 				ISBN = new Scanner(System.in).nextLine();
 			}
 			else break;
 		}
 		return ISBN;
 	}
-	/** validate Category , to make sure the category input by the user exist in the library **/
+	/** validate Category , to make sure the category input by the user exists in the library **/
 	private String validateCategory() {
 		String category;
 		while(true){
