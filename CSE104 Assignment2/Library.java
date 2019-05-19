@@ -1,6 +1,8 @@
 package Library;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
-import java.util.regex.*;
+import java.util.regex.Pattern;
 public class Library {
 	private String[] categorys= {"IT","Arts", "Business", "Comics", "Cooking", "Sports"};
 	private Book head;
@@ -40,7 +42,7 @@ public class Library {
 		}
 		@Override
 		public String toString() {
-			return ISBN + " \t/" + bookTitle + " \t/" + bookauthor + " \t/" +  copyNumber + " \t/" + copyAvailable;
+			return ISBN + " \t/" + bookTitle + " \t/" + bookauthor + " \t/"+ category+ " \t/" +  copyNumber + " \t/" + copyAvailable;
 		}
 	}
 	/** Here is the userInterface, index page**/
@@ -55,20 +57,13 @@ public class Library {
 		System.out.println("Enter your command here:");
 		String input  = new Scanner(System.in).nextLine().trim().toLowerCase();
 		switch(input) {
-		case "add": addBook();
-		break;
-		case "update" :updateBook();
-		break;
-		case "search" :searchBook();
-		break;
-		case "delete": deleteBook();
-		break;
-		case "display": displayBook();
-		break;
+		case "add": addBook();break;
+		case "update" :updateBook();break;
+		case "search" :searchBook();break;
+		case "delete": deleteBook();break;
+		case "display": displayBook();break;
 		case "quit":System.out.println("You have successfully logged out the System"); System.exit(0);
-		default:
-			System.out.println("your command is illegeal, please input the command listed above\n");
-			userInterface();
+		default:System.out.println("your command is illegeal, please input the command listed above\n");userInterface();
 		}
 		}
 	/** add book into Library **/
@@ -253,34 +248,64 @@ public class Library {
 		System.out.println("Please input the keywords of the books: author or bookname or category");
 		keywords =validateAuthorTitle().toLowerCase().trim();
 		Book cur = head;//travesal from the head
-		boolean isFindbook = false;
+		boolean isFindbook = false;ArrayList<Book> books = new ArrayList<Book>();
 		for(int i=0;i<Librarysize;i++) {
 			if(cur.bookauthor.toLowerCase().contains(keywords)||cur.bookTitle.toLowerCase().contains(keywords)||cur.category.toLowerCase().contains(keywords)) {
-				System.out.println("found books:" + cur);
+				books.add(cur);
 				isFindbook = true;
 			}
 			cur = cur.Next;//assign the next node to the current node	
 		}
-		if(!isFindbook) {
-			System.out.println("No books found");
+		if(isFindbook) {
+			books.sort(new Comparator<Book> () {
+				@Override
+				public int compare(Book a, Book b) {
+					return b.copyNumber - a.copyNumber;
+				}
+			});
+			for (Book book : books) System.out.println(book);
 		}
+		else if(!isFindbook) System.out.println("No books found");
+		System.out.println("==========================");
 		System.out.println("Enter 'Y/y' to search other books, anything else to quit");
-		userinput = new Scanner(System.in).nextLine().toLowerCase();
+		userinput = new Scanner(System.in).nextLine().toLowerCase().trim();
 		if(userinput.equals("y")) searchBook();
 		else userInterface();
 		}
 	/** display book, traversal the library and print out the books exist in library **/
 	private void displayBook() {
 		Empty_back();
+		System.out.println("Please choose the books' information display by:"
+				+ "\nA:Author\nC:by Category, \nanything else to quit to Userinterface");
+		String userinput = new Scanner(System.in).nextLine().toLowerCase().trim();
+		switch(userinput) {
+		case "c":displayBook("c");System.out.println("=======================");userInterface();break;
+		case "a":displayBook("a");System.out.println("=======================");userInterface();break;
+		default: System.out.println("=======================");userInterface();break;
+		}
+	}
+	private void displayBook(String userchoice) {
 		Book cur = head;
 		System.out.println("Here are the books in the Library below");
 		System.out.println("ISBN / TITLE/ AUTHOR/ CATEGORY/ TOTAL_COPIES/ AVAILABLE_COPIES");
+		ArrayList<Book> sortBook = new ArrayList<Book>();
 		for(int i=0; i<Librarysize; i++) {
-			System.out.println(cur + "\n");
+			sortBook.add(cur);
 			cur=cur.Next;
 		}
-		System.out.println("=======================");
-		userInterface();
+		if(userchoice.equals("c")) sortBook.sort(new Comparator<Book>(){
+			@Override
+			public int compare(Book a, Book b) {
+				return b.category.compareTo(a.category);
+			}
+		});	
+		else if(userchoice.equals("a")) sortBook.sort(new Comparator<Book>(){
+			@Override
+			public int compare(Book a, Book b) {
+				return a.bookauthor.compareTo(b.bookauthor);
+			}
+		});
+		for(Book book : sortBook) System.out.println(book);
 	}
 	/** validate book's ISBN,title, author, to make sure there is no repeating book or the same book in library **/
 	private boolean validateBook(String ISBN, String title, String author){
