@@ -387,7 +387,7 @@ public class Library {
 			else break;
 			}
 			catch(Exception e) {
-				System.out.println("Please input a postive number or enter 'quit' to quit");
+				System.out.println("Please input a number between 1 to 2147483647 or enter 'quit' to quit");
 			}
 		}
 		return copyNumber;
