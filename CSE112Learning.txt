@@ -1,4 +1,367 @@
-                                                CSE112 Week 7 笔记
+                                                CSE Week 2&3&4 笔记
+1.什么是agent?
+agent is anything that could perceive its environment through sensors and acting upon that environment through its actuators.
+2.rational 和rationality 
+rational 在中文上又被称为理性的。在人工智能领域它被认作是一个agent的standrard 其具体表现为
+rational is to do the right things. right things here refer to the actions which could maximize the progess of goals.
+rationality is different from omniscience(知识无穷的), rationality is concerned with expected success give what has been perceived.
+用一句话来说就是rational agent一定是在已知条件下，能够根据已知条件自行作出推断抉择并获得预期上的成功。而omniscient agent是知识无穷的，也就是说它知道任何情况和任何结果
+注意：在当今硬件条件的限制下，完全理性或知识无穷的agent是不可实现的
+3.agent program 和 architechture
+agent program : agent program is a function that implements the agent mapping from percepts to actions.
+architecture:We assume this program will run on some sort of computing device, which we will call the architechture.The architechture could be a plain computer or other hardware
+In general,
+the architecture makes the percepts from the sensors available to the program, runs the program,
+and feeds the program’s action choices to the effectors as they are generated
+The relationship between architechture and program is agent = architecture + program.
+4. agent function 
+agent function is a relationship between percepts and action choices.
+The input(variable) is a percept and the function value(output) is the choice of action which agent should take.
+5.autonomy
+An agent is autonomous if its behavior is determined by its own experience(with the ability to learn and adapt) instead of compeletely relying on its built-in knowledge.
+6.reflex agent:
+reflex agent has two types :
+1. Simple reflex agents: they are based on condition-action rules, implemented with an appropriate production system (stateless devices which do not have memory of past states of the world)
+2. Model-based reflex agents: Besides the function simple relfex agent has, they have internal state to keep track of past states of the world.
+
+7. Goal-based agents: in addition to state information, having goal information that describes desirable situations(taking future events into consideration)
+
+8.Utility-based agents:base their decisions on classic axiomatic utility theory in order to act rationally. 
+A particular configuration of the world, a world state, can be assigned a utility value (the quality of being useful) for the agent
+A sequence of actions is preferred if it leads to a goal state with higher utility value
+
+9 Learning agents:
+Learning modifies the agent's decision mechanisms to improve its performance. This type of agents could adpat to unknown environments and get information from environment that could improve its action decision.
+
+10. Turing test
+Turing test is an AI test which with the tester separated from the subject (a person and a machine), the subject is asked questions by means of a device (such as a keyboard).
+If more than 30 percent of the testers could not tell whether the subject was a human or a machine, then the machine passed the test.
+
+Do you think Turing Test is still a Valid Test of Artificial Intelligence?
+In many peoples’ opinion, the Turing test is not very helpful for designing intelligent systems, why?
+I think Turing test is not valid.
+reason 1 :The test is based on subjective judgement of whomever happens to be the interrogator, however long the conversation was, and what the convesation was about.
+reason 2 :This definition would be philosophical behaviorism, which has obvious problems. In short, we think that being intelligent causes the behavior, but doesn’t consist in the behavior.
+
+Some examples of PEAS:
+Vacuum Agent:
+• Performance Measure: minimize energy consumption, maximize dirt pick up. Making this precise: one point for each clean square over lifetime of 1000 steps
+• Environment: two squares, dirt distribution unknown, assume actions are deterministic and environment is static (clean squares stay clean)
+• Actuators: Left, Right, Suck, NoOp
+• Sensors: agent can perceive its location and whether the location is dirty
+
+automated taxi driver:
+– Performance measure: Safe, fast, legal, comfortable trip, maximize profits
+– Environment: Roads, other traffic, pedestrians, customers
+– Actuators: Steering wheel, accelerator, brake, signal, horn
+– Sensors: Cameras, sonar, speedometer, GPS, odometer, engine sensors, keyboard 
+
+Medical Diagnosis System
+• Agent – Medical diagnosis system
+• Performance measure: Healthy patients, minimize costs, lawsuits
+• Environment: Patients, hospital, staff
+• Actuators: Screen display (questions, tests, diagnoses, treatments, referrals)
+• Sensors: Keyboard (entry of symptoms, findings, patients’ answers)
+
+What is a problem ? 
+A goal and a means for achieving the goal, The goal specifies the state of affairs we want to bring about.
+The means specifies the operations we can perform in an attempt to bring about the goal
+If a problem is defined by its elements and their relations, then a state is a representation of these elements at a given moment.
+（一个问题是由它的元素以及这些元素间的关系所定义的，那么一个状态(state)可以说是这些元素在某些时候的表示形式
+There are two special states : Initial state (starting point ), Final state(goal state)
+
+State space:
+state space is the set of all states reacheable from the inital state. 状态空间是从初始状态开始，所有可能到达的状态的集合
+ It forms a graph (or map) in which the nodes are states and the arcs between nodes are actions.
+ A path in the state space is a sequence of states connected by a sequence of actions
+ The solution of the problem is part of the map formed by the state space
+一个problem solving agent 就是依靠这些搜索这些状态来解决问题的
+Search tree:
+ A solution is an action sequence, so search algorithms work by considering various possible action sequences.
+ The possible action sequences starting at the initial form a search tree with the initial state at the root; the branches are actions and the nodes correspond to states in the state space of the problem.
+Search nodes:
+ Search node is the node in the search tree and each node correspond to a state.
+
+Goal: A goal is defined as a desirable state for an agent, goal state could be many or just one.
+
+Action(Operators):Operators are legal actions which the agent can take to move from one state to another.
+
+Successor function:A successor function is a description of possible actions, a set of operators. It is a transformation function on a state representation, which converts it into another state
+(后继函数是对可能操作的描述，是一组操作符。它是状态表示上的转换函数，将其转换为另一种状态)
+
+Branching factor: the branching factor is maximum number of successor of any node
+
+What are the stages of problem solving?
+1.formulate goal
+2.formulate the problem : states and Operations/Actions
+3.formulate the search tree
+4.Find a solution by search through search node to achieve the goal state, the solution should be a sequence of nodes.
+
+How to formulate a problem?
+The key point is abstraction, which is removing irrelevant detail from a representation.
+Abstraction includes abstracting the states and the actions
+a good abstraction should have two standards :
+1.Must create an approximate, simplified, model of the world for the computer to deal with, since the real world is too detailed to be modeled exactly
+2.Good abstractions retain all important details
+
+what is a solution to a problem ?
+The path through the state space from the inital state to a goal state is called solution
+                                                
+                                                
+Summary :
+1.Before an agent can start searching for  solutions , a gola must be identified and a well-defined problem must be formulated
+2.a problem consits of five parts: the inital state, a set of actions , a transition model describing the results of the actions, a goal test function and a path cost function.
+The environment of the problem is represented by a state space . A path through the state space from the initial state to a goal state is a solution.
+3.A general tree-search algorithm considers all possible paths to find a solution, while a Graph-search algorithm avoids consideration of redundant paths.
+4.Search algorithm are judged on the basis of completeness, optimality, time complexity and space complexity.Complexity depends on branching fator, and depth of the shallowest solution.
+5.Uninformed search methods have access only to the problem definition.The algorithms are as follows:
+-- Breadth-first search expands the shallowest nodes first; it is complete, optimal for unit setp costs,but has exponential space complexity
+-- Uniform-cost search expands the node with lowest path cost and is potimal for general step costs.
+-- Depth-first search expands the deepst unexpanded node first. It is neither complete nor optimal,but has linear space complexity.Depth-limited search adds a depth bound
+-Iterative deepning search calls depth-first search with increasing depth limits until a goal is found. It is complete, optimal for unit step costs,has time complexity comparable to breadth-first search, and has linear space complexity.
+-Bidirectional search can enormously reduce time time complexity, but it is not always applicable and may require too much space.
+6.Informed search methods may have access to a heuristic function h(n) that estimates the cost of a solution from n:
+- best-first search algorithm selects a node for expansion according to an evaluation function
+-Greed best-first search alogrithm expands nodes with minimal h(n).It is not optimal,but is often efficient.
+-A* search expands nodes with minimal f(n)= g(n)+h(n). A* is complete and optimal,provided that h(n) is admissible or consistent. The space complexity of A* is still prohibitive.
+-RBFS and SMA* are robust , optimal search algorithm that use limited amounts of memory; given enough time ,they can solve problems that A* cannot solve because it runs out of memory.
+
+                                  Week 5 笔记
+1. what is knowledge?
+Knowledge = Facts＋Rules＋Control Strategy +(sometimes ) Faiths
+Knowledge is information about some domain or subject area, or about how to do something
+简而言之知识是由facts,rules,control Strategy,Faiths 四个中任意组合或者仅由其中之一组成的
+我们接下来讨论这几种知识的分类:
+1.Facts: declarative knowledge 简而言之就是陈述句，表达一个事实 如theif(David)说明David是个贼
+2.Rules: procedural knowledge 过程性知识 . 这种知识一般是由前提加事实组成的 例如 if(thief(X)) and likes(X,Y) then steal(X,Y)如果X是theif并且他喜欢Y，那么他会偷y
+3.Control Strategy: 元级别，超级知识
+
+2.Knowledge representation
+Knowledge representation (KR) arises in both cognitive science and AI
+- In cognitive science it is concerned with how people store and process information.
+– In AI, the primary aim is to store knowledge so that programs can process it and achieve the verisimilitude of human intelligence.
+– AI researchers have borrowed representation theories from cognitive science. 
+3. Levels of Knowledge 
+和网络连接协议分层一样，知识也是有分层的。知识的层级有:
+ The knowledge level describes what is known independent of the representation model
+ Example: we can say that a system knows that robins are a species of bird
+ The logical level describes the statement(s) in the KR model that represent(s) a fact
+ Example: a system can contain the knowledge ISA(robin, bird)
+ The implementation level refers to the way in which the knowledge has been encoded.
+Example: the statement ISA(robin,bird) might be encoded as a list or an array of facts
+可以这样理解，knowledge level是人类理解的知识层面 logical level是在knowledge representation 模型中呈现的形式 implementation level是知识存储在计算机内部的形式
+对于knowledge level和 implementation level的知识呈现方式我们并不关心，我们只关心在agent， 即人工智能中能够理解的方式，所以我们的学习都是建立在logical level上的知识。
+为什么要使用知识呈现？
+General problem-solving techniques are useful, but effectiveness often depends on extensive, domain specific knowledge
+对于一般性的知识，我们理解起来比较容易，但是对于一些专业领域的知识我们若不将它用某种规定的方式呈现的话，会难以理解并且在解决问题时也会遇到很多麻烦。这就是知识呈现的最大意义
+一个好的知识呈现应当让知识遵循以下原则呈现出来，并且能够让计算机人类都能很好地理解
+ Primary aim is to develop program to implement well understood and precisely defined set of operations
+ 下面我们来讨论一些经典的知识呈现模型：
+ 1.natural language 自然语言模型
+Natural language is certainly expressive enough!
+But it is also too ambiguous for automated reasoning
+No clear semantics 优点：表达性强，缺点是语义很难理解并且有很多时候会出现模糊的情况
+2.Database 数据库模型
+Advantages
+ Databases are well suited to efficiently represent and process large amounts of data (and derivation from a database is virtually independent of its size)
+ We can build traditional database systems to process more complex and more powerful representational devices (e.g., frames)
+可以存储并处理大量的数据
+Disadvantages
+• Only simple aspects of the problem domain can be accommodated
+• We can represent entities and relationships between entities, but not much more
+• Reasoning is very simple. Basically the only possible reasoning is simple lookup, and we usually need more sophisticated processing than that
+只能容纳问题的简单方面
+只能够表示实体与实体之间的一些简单关系，但在实际解决问题的时候，这种关系一般是多而且复杂的。
+综合上述两个模型，我们可以得出结论，一个好的KR模型应当具有以下特征：
+*表征充分性（Representational adequacy）
+KR方案必须能够实际表示适合我们问题的知识
+*推论充分性（Inferential adequacy）
+KR方案必须允许我们从旧知识中作出新的推论
+对于推论，它有以下两种性质:
+稳健性——新知识确实来自旧知识;
+完整性——它应该做出所有正确的推论
+*推理效率（Inferential efficiency）
+KR方案应该是可处理的——在合理的(多项式)时间内作出推论。
+不同的应用程序可能对相同的知识库提出不同的要求
+*定义良好的语法和语义（Well-defined syntax & semantics）
+任何结构是否“语法正确”
+如何阅读任何特定的结构-没有歧义
+*自然（Naturalness）
+理想情况下，KR方案应该与我们的思维、阅读和写作方式密切相关。
+因此鉴于以上所需满足性质，有以下几种模型能够作为使用：
+Propositional Logic
+Production Systems (Rule-based Systems)
+ ― Expert systems
+Semantic Networks
+Frames
+Bayesian Networks
+Knowledge graph 
+在这里我们讨论的模型为命题逻辑 专家系统,下面我们先来讨论生产系统
+生产系统又称为规则系统(Rule-based Systems)，在这套系统中:
+Knowledge is specified as a collection of rules
+Each rule has the form
+condition −! action
+which may be read if condition then action
+The condition (antecedent(先行词)) is a pattern 条件(先行词)是一种模式
+The action (consequent) is an operation to be performed if the rule fires 操作(后续操作)是在规则触发时要执行的操作
+Knowledge is applied to facts—unconditional statements that are assumed to be correct (at the time they are used) 知识适用于事实——假定正确的无条件陈述(在使用时)
+举个例子
+Rules:
+R1: IF animal has feathers
+THEN animal is a bird
+R2: IF animal is a bird
+THEN animal can fly
+R3: IF animal can fly
+THEN animal is not scared of heights
+Facts:
+F1: kiwi has feathers [Given]
+F2: kiwi can fly [From F1 by R1]
+F3: kiwi is not scared of heights [From F2 by R2]
+可以看见，实际的知识是被翻译成了一个又一个的条件规则加事实语句实现的。 并且由给出的事实可以推导出新的知识
+规则系统架构:
+ A collection of rules
+ A collection of facts
+ A rule fires if a fact matches the condition of the rule
+  -Mechanism that fires rules is inference engine.
+总的来说由一系列规则一系列事实加推导引擎构成。推导引擎是用来匹配事实和规则的系统
+图片参考ppt
+接下来我们分析这种模型的优缺点:
+优势
+这些系统非常有表现力。
+这些规则导致了一定程度的模块化。
+缺点
+规则缺乏精确的语义。
+这些系统并不总是高效的。
+Expert System: Expert System 是rule-based system 其中的一种实现
+An expert system is a computing system that is capable of expressing and reasoning about some domain of knowledge.
+Typical domains are:
+— medicine (INTERNIST, MYCIN, . . . )
+— geology (PROSPECTOR)
+— chemical analysis (DENDRAL)
+— configuration of computers (R1)
+ The purpose of the expert system is to be able to
+solve problems or provide advice in that domain
+Expert system programming is distinctively different from conventional programming
+Expert system = inference engine + knowledge base + data
+The inference engine uses one of several available forms of inferencing.
+ By inference, we mean that the method is
+used in a knowledge-based system to process the supplied data, and the stored knowledge, so as to produce correct conclusions.
+                                          Week 6 
+The term 'rule' in AI, which is the most commonly used type of knowledge representation, can be defined as an IF-THEN structure that relates given information or facts in the IF part to some
+action in the THEN part. A rule provides some description of how to solve a problem.
+Rules are relatively easy to create and understand.
+Any rule consists of two parts: the IF part, called the antecedent (premise or condition) and 
+the THEN part called the consequent (conclusion or action).
+A rule can have multiple antecedents joined by the keywords of AND (conjunction) or OR
+在了解expert system之前有必要了解一下rule-based system 和 expert-system共同的祖先系统:Production System
+A production system is defined by 3 basic components:
+1. A rule base that consists of a collection of If LHS then RHS statements called productions, production rules, or simply rules. 
+(LHS part called productions ,RHS part called production rules or rules)
+2. A working memory which holds facts including the data, goal statement, and intermediate results that make up the current state of the problem in solving. 
+3. An inference engine that decides when to apply which rules
+在该模型中 长期内存用于存储rules 短期内存用于存储facts， 在需要的时候inference engine 从这两个内存中调取并得出结论
+在了解了该模型以后我们再将视线聚焦到expert system上，
+对于expert system:
+它是由Knowledge Base, Database, inference engine, explanation facilities, Userinterface五项组成的
+Knowledge Base 中存储的是规则， Database中存储的是事实
+*The knowledge base contains the domain
+knowledge useful for problem solving. In a rulebased expert system, the knowledge is
+represented as a set of rules. Each rule specifies a
+relation, recommendation, directive, strategy or
+heuristic and has the IF (condition) THEN (action)
+structure. When the condition part of a rule is
+satisfied, the rule is said to fire and the action
+part is executed.
+*The database includes a set of facts used to match against the IF (condition) parts of rules stored in the knowledge base.  
+*The inference engine carries out the reasoning
+whereby the expert system reaches a solution. It
+links the rules given in the knowledge base with the
+facts provided in the database.               
+* The explanation facilities enable the user to ask
+the expert system how a particular conclusion is
+reached and why a specific fact is needed. An
+expert system must be able to explain its reasoning
+and justify its advice, analysis or conclusion.
+* The user interface is the means of communication
+between a user seeking a solution to the problem
+and an expert system
+下面我们接着来讨论Inference engine：
+对于Inference engine 有以下几个机制和算法:
+1.Match – Find the rules in the rule base whose LHSs are satisfied from the
+existing contents of the working memory.
+2.Conflict resolution: Select one rule with a satisfied LHS by applying one or
+more conflict resolution strategies (e.g., selecting the first rule whose LHS
+matches the working memory or the first satisfied rule whose RHS can
+produce new items). If no rules are available in the rule base, stop. 
+3.Act:Adapt the working memory according to the RHS of the selected rule,
+perhaps adding a new item or deleting an old one.    
+4.Go to Step 1 for further 3-phase “match-conflict resolution-act” cycles
+
+Control Schemes:
+Forward chaining: starts with the facts and sees what rules to apply (and hence what should be done), given the facts. (Data-driven search)
+前项链接 是数据驱动（data driven）的推理技术。从已知数据开始展开推理。
+每一次只执行顶端的一条规则。当有规则被触发时，就有新事实加入数据库。
+这个新的事实的改变又触发了另外一条规则（任何规则只能触发一次）
+当没有规则可触发时，循环终止。
+Backward chaining starts with something to find out and looks for rules that will help in answering it.(Goal-driven search)
+后向链接 是目标驱动的推理技术。在后向链接中，假设一个既定的结果，从所有规则中的THEN部分有这个结果的，并且数据符合要求。就触发这一条规则。
+如果不符合就继续以这个IF作为一个下一个规则的THEN部分继续往前推导，看是否符合数据，循环往复，直到所有规则，数据都不可以满足IF的设定
+总结，前项连接和后项链接的区别:
+前项链接将用户给出的问题提炼成前提条件，并从知识库中提取规则进行匹配从而得出结论。而后项链接则将用户给出的问题提炼成结论，并由结论去反推前提
+举一个例子
+R1: IF may_rain THEN should_take_umbrella
+R2: IF cloudy THEN may_rain
+在以上这段规则中，若用户给的条件为may_rain。 那么根据前向连接则有
+首先根据may_rain将其当作前提进行规则匹配，这时只有R1满足，因为R2的may_rain是结论。
+根据may_rain推出结论should_take_umberella. 再将这个新推出的结论当成前提去继续匹配其他规则
+这时候发现没有一个规则可以将should_take_umbrella当成前提使用，所以推理结束。反馈给用户的结果为should_take_umbrella
+
+根据后向链接则有:
+将may_rain当成结论进行匹配，发现此时只有R2满足条件，因为在R1中may_rain是前提
+匹配成功后推出该条规则的前提，这条规则的前提为cloudy。
+将cloudy当成新的结论继续去匹配规则，此时R1发现没有规则能将其当成结论并匹配，所以返回给用户的结果为cloudy
+换句话说，前向链接将用户给出的问题当成LHS匹配，而后向链接将其当成RHS部分进行匹配
+
+Forward:
+*Working memory stores the state of the world (known facts)
+*facts in WM are matched with LHS of rules
+Backward:
+*Working memory stores (sub) goals & facts
+*(sub)goals in WM are matched with RHS of rules
+后向链接驱动的程序有:
+MYCIN 
+PROLOG
+
+
+
+
+
+
+
+In a forward chaining system:
+ Facts are held in the working memory
+ Condition-action rules represent actions to be taken when
+the specified facts occur in the working memory
+ Typically the actions involve adding or deleting facts
+from the working memory
+Repeat
+ Collect the rule whose condition matches a
+fact in the working memory (WM).
+ Do actions indicated by the rule (add facts
+to WM or delete facts from WM)
+ Until problem is solved or no condition
+matches
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                          Week 7 笔记
 Knowledge Representation （知识呈现）指的是能够以一种合适的计算机语言表达真实世界的知识的方式
 在人工智能领域中我们常常使用推断引擎已经知识库去推测一些未知的知识。其执行过程为：
 在推断引擎中加入一些与定义域无关的算法，这些算法在这可以理解为一些条件或者问题。推断引擎会向知识库（knowledge base)发出询问、知识的请求。在获取了这些知识后结合其算法推断出新结论、知识
